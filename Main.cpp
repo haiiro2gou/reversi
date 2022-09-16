@@ -113,8 +113,7 @@ void judge_winner() {
 }
 
 void _main() {
-  cout << "盤のサイズを入力してください(4 ~ 26)" << endl;
-  cout << "> " << endl;
+  printf("盤のサイズを入力してください(4 ~ 26)\n> "); fflush(stdout);
   string s; cin >> s;
   int ss = stoi(s);
   if (4 <= ss && ss <= 26 && ss % 2 == 0) N = ss;
@@ -130,8 +129,7 @@ void _main() {
     int h, w;
     string pos;
     do {
-      cout << "駒の位置を入力してください(例:a1)" << endl;
-      cout << "> " << endl;
+      printf("駒の位置を入力してください(例:a1)\n> "); fflush(stdout);
       cin >> pos;
       w = tolower(pos[0]) - 'a' + 1;
       h = pos[1] - '0';
