@@ -28,18 +28,19 @@ void show_board() {
     rep(w, 0, N+1) {
       switch (board[h][w]) {
         case -1:
-          cout << "●";
-          break;
-        case 1:
           cout << "○";
           break;
+        case 1:
+          cout << "●";
+          break;
         case 0:
-          cout << "-";
+          cout << "  ";
           break;
         case 2:
           if (h == 0 && w != 0) cout << (char)('a' + w - 1);
           else if (h != 0 && w == 0) cout << (char)('0' + h);
           else cout << " ";
+          cout << " ";
           break;
         default:
           break;
@@ -52,10 +53,10 @@ void show_board() {
 void show_player() {
   switch (player) {
     case -1:
-      cout << "先手の手番です" << endl;
+      cout << "Dark's Turn" << endl;
       break;
     case 1:
-      cout << "後手の手番です" << endl;
+      cout << "Light's Turn" << endl;
       break;
     default:
       break;
@@ -82,8 +83,7 @@ bool is_finished() {
   rep(h, 1, N+1) rep(w, 1, N+1) if (check_place(h, w)) return false;
   player *= -1;
   rep(h, 1, N+1) rep(w, 1, N+1) if (check_place(h, w)) {
-    cout << "置くことが可能なマスが存在しません" << endl;
-    cout << "手番を変更しました" << endl;
+    cout << "Pass" << endl;
     return false;
   }
   return true;
@@ -103,22 +103,22 @@ void count_stone() {
     if (board[h][w] == -1) cnt_b++;
     if (board[h][w] == 1) cnt_w++;
   }
-  printf("%d手目 ●:%d ○:%d\n", T, cnt_b, cnt_w); fflush(stdout);
+  printf("Turn %d ○:%d ●:%d\n", T, cnt_b, cnt_w); fflush(stdout);
 }
 
 void judge_winner() {
-  if (cnt_w < cnt_b) cout << "先手の勝利" << endl;
-  else if (cnt_b < cnt_w) cout << "後手の勝利" << endl;
-  else cout << "引き分け" << endl;
+  if (cnt_w < cnt_b) cout << "Dark Win" << endl;
+  else if (cnt_b < cnt_w) cout << "Light Win" << endl;
+  else cout << "Draw" << endl;
 }
 
 void _main() {
-  printf("盤のサイズを入力してください(4 ~ 26)\n> "); fflush(stdout);
+  printf("Input the board size. (4 ~ 26)\n> "); fflush(stdout);
   string s; cin >> s;
   int ss = stoi(s);
   if (4 <= ss && ss <= 26 && ss % 2 == 0) N = ss;
   else {
-    printf("エラーが発生しました\n盤のサイズを8に設定します\n"); fflush(stdout);
+    printf("Error: Set the board size to 8.\n"); fflush(stdout);
     N = 8;
   }
   make_board();
@@ -129,7 +129,7 @@ void _main() {
     int h, w;
     string pos;
     do {
-      printf("駒の位置を入力してください(例:a1)\n> "); fflush(stdout);
+      printf("Input the position of the next stone. (Example: a1)\n> "); fflush(stdout);
       cin >> pos;
       if (pos.length() == 2 && pos[0] - 'a' < N && pos[1] - '0' <= N) {
         w = tolower(pos[0]) - 'a' + 1;
