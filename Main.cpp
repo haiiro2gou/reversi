@@ -10,8 +10,8 @@ typedef long long ll; const int inf = INT_MAX / 2; const ll infl = 1LL << 60;
 template<class T> bool chmax(T &a, const T &b) { if (a<b) { a = b; return 1; } return 0; }
 template<class T> bool chmin(T &a, const T &b) { if (b<a) { a = b; return 1; } return 0; }
 
-int N = 8, T = 0, cnt_b, cnt_w;
-vector<vector<int>> board(N+2, vector<int>(N+2, 0));
+int N = 26, T = 0, cnt_b, cnt_w;
+vector<vector<int>> board(N+2, vector<int>(N+2));
 int player = -1;
 
 void make_board() {
@@ -113,8 +113,7 @@ void judge_winner() {
 }
 
 void _main() {
-  cout << "盤のサイズを入力してください(4 ~ 26)" << endl;
-  cout << "> " << endl;
+  printf("盤のサイズを入力してください(4 ~ 26)\n> "); fflush(stdout);
   string s; cin >> s;
   int ss = stoi(s);
   if (4 <= ss && ss <= 26 && ss % 2 == 0) N = ss;
@@ -130,11 +129,14 @@ void _main() {
     int h, w;
     string pos;
     do {
-      cout << "駒の位置を入力してください(例:a1)" << endl;
-      cout << "> " << endl;
+      printf("駒の位置を入力してください(例:a1)\n> "); fflush(stdout);
       cin >> pos;
-      w = tolower(pos[0]) - 'a' + 1;
-      h = pos[1] - '0';
+      if (pos.length() == 2 && pos[0] - 'a' < N && pos[1] - '0' <= N) {
+        w = tolower(pos[0]) - 'a' + 1;
+        h = pos[1] - '0';
+      } else {
+        h = N / 2; w = N / 2;
+      }
     } while (!check_place(h, w));
     place_stone(h, w);
     player *= -1;
