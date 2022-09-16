@@ -28,10 +28,10 @@ void show_board() {
     rep(w, 0, N+1) {
       switch (board[h][w]) {
         case -1:
-          cout << "â—";
+          cout << "œ";
           break;
         case 1:
-          cout << "â—‹";
+          cout << "›";
           break;
         case 0:
           cout << "-";
@@ -52,10 +52,10 @@ void show_board() {
 void show_player() {
   switch (player) {
     case -1:
-      cout << "å…ˆæ‰‹ã®æ‰‹ç•ªã§ã™" << endl;
+      cout << "æŽè‚ÌŽè”Ô‚Å‚·" << endl;
       break;
     case 1:
-      cout << "å¾Œæ‰‹ã®æ‰‹ç•ªã§ã™" << endl;
+      cout << "ŒãŽè‚ÌŽè”Ô‚Å‚·" << endl;
       break;
     default:
       break;
@@ -82,8 +82,8 @@ bool is_finished() {
   rep(h, 1, N+1) rep(w, 1, N+1) if (check_place(h, w)) return false;
   player *= -1;
   rep(h, 1, N+1) rep(w, 1, N+1) if (check_place(h, w)) {
-    cout << "ç½®ãã“ã¨ãŒå¯èƒ½ãªãƒžã‚¹ãŒå­˜åœ¨ã—ã¾ã›ã‚“" << endl;
-    cout << "æ‰‹ç•ªã‚’å¤‰æ›´ã—ã¾ã—ãŸ" << endl;
+    cout << "’u‚­‚±‚Æ‚ª‰Â”\‚Èƒ}ƒX‚ª‘¶Ý‚µ‚Ü‚¹‚ñ" << endl;
+    cout << "Žè”Ô‚ð•ÏX‚µ‚Ü‚µ‚½" << endl;
     return false;
   }
   return true;
@@ -103,22 +103,22 @@ void count_stone() {
     if (board[h][w] == -1) cnt_b++;
     if (board[h][w] == 1) cnt_w++;
   }
-  printf("%dæ‰‹ç›® â—:%d â—‹:%d\n", T, cnt_b, cnt_w); fflush(stdout);
+  printf("%dŽè–Ú œ:%d ›:%d\n", T, cnt_b, cnt_w); fflush(stdout);
 }
 
 void judge_winner() {
-  if (cnt_w < cnt_b) cout << "å…ˆæ‰‹ã®å‹åˆ©" << endl;
-  else if (cnt_b < cnt_w) cout << "å¾Œæ‰‹ã®å‹åˆ©" << endl;
-  else cout << "å¼•ãåˆ†ã‘" << endl;
+  if (cnt_w < cnt_b) cout << "æŽè‚ÌŸ—˜" << endl;
+  else if (cnt_b < cnt_w) cout << "ŒãŽè‚ÌŸ—˜" << endl;
+  else cout << "ˆø‚«•ª‚¯" << endl;
 }
 
 void _main() {
-  printf("ç›¤ã®ã‚µã‚¤ã‚ºã‚’å…¥åŠ›ã—ã¦ãã ã•ã„(4 ~ 26)\n> "); fflush(stdout);
+  printf("”Õ‚ÌƒTƒCƒY‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢(4 ~ 26)\n> "); fflush(stdout);
   string s; cin >> s;
   int ss = stoi(s);
   if (4 <= ss && ss <= 26 && ss % 2 == 0) N = ss;
   else {
-    printf("ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ\nç›¤ã®ã‚µã‚¤ã‚ºã‚’8ã«è¨­å®šã—ã¾ã™\n"); fflush(stdout);
+    printf("ƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½\n”Õ‚ÌƒTƒCƒY‚ð8‚ÉÝ’è‚µ‚Ü‚·\n"); fflush(stdout);
     N = 8;
   }
   make_board();
@@ -129,7 +129,7 @@ void _main() {
     int h, w;
     string pos;
     do {
-      printf("é§’ã®ä½ç½®ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„(ä¾‹:a1)\n> "); fflush(stdout);
+      printf("‹î‚ÌˆÊ’u‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢(—á:a1)\n> "); fflush(stdout);
       cin >> pos;
       if (pos.length() == 2 && pos[0] - 'a' < N && pos[1] - '0' <= N) {
         w = tolower(pos[0]) - 'a' + 1;
